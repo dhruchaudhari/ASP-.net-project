@@ -1,0 +1,25 @@
+﻿@model IEnumerable<StockDisplayModel>
+@{
+    Layout = "_AdminLayout";
+}
+<h2>Stocks</h2>
+
+
+<table class="table table-bordered">
+  <tr>
+    <th>Food</th>
+    <th>Stock</th>
+    <th>Actions</th>
+  </tr>
+  @foreach(var item in Model)
+  {
+    <tr>
+      <td>@item.FoodName</td>
+      <td>@item.Quantity</td>
+      <td>
+         <a asp-action="ManangeStock" asp-controller="Stock" asp-route-foodId="@item.FoodId" class="btn btn-info"> Update Stock</a>
+      </td>
+    </tr>
+  }
+</table>
+

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Cuisines>
+@{
+    Layout = "_AdminLayout";
+}
+
+<h2>Cuisines</h2>
+
+<a asp-action="AddCuisine" asp-controller="Cuisine" class="btn btn-primary">Add More</a>
+
+<table class="table table-striped my-2">
+    <tr>
+        <th>Cuisine</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach(var cuisine in Model)
+    {
+        <tr>
+            <td>@cuisine.CuisineName</td>
+            <td>
+                <a asp-action="UpdateCuisine" asp-controller="Cuisine" asp-route-id="@cuisine.Id" class="btn btn-success">Edit</a>
+                <a asp-action="DeleteCuisine" asp-controller="Cuisine" asp-route-id="@cuisine.Id" class="btn btn-danger" onclick="return window.confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+

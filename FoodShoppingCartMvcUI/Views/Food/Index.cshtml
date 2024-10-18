@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Food>
+@{
+    Layout = "_AdminLayout";
+}
+
+<h2>Foods</h2>
+
+<a asp-action="AddFood" asp-controller="Food" class="btn btn-primary">Add More</a>
+
+@if(Model?.Count()>0)
+{
+    <table class="table table-striped my-2">
+        <tr>
+            <th>Image</th>
+            <th>Food</th>
+            <th>Restorant</th>
+            <th>Cuisine</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var food in Model)
+        {
+            <tr>
+                <td>
+                    @if(string.IsNullOrWhiteSpace(food.Image))
+                    {
+                        <img src="/Images/NoImage.png" style="width:80px;height:100px" alt="food image" />
+                    }
+                    else
+                    {
+                        <img src="/images/@food.Image" style="width:80px;height:100px" alt="food image" />
+                    }
+                </td>
+                <td>@food.FoodName</td>
+                <td>@food.RestorantName</td>
+                <td>@food.Cuisine.CuisineName</td>
+                <td>@food.Price</td>
+                <td>
+                    <a asp-action="UpdateFood" asp-controller="Food" asp-route-id="@food.Id" class="btn btn-success">Edit</a>
+                    <a asp-action="DeleteFood" asp-controller="Food" asp-route-id="@food.Id" class="btn btn-danger" onclick="return window.confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h3>No records</h3>
+}
+
